@@ -8,8 +8,6 @@ import java.util.*;
 public class StarProject
 {
     // instance variables
-    public String INTRO_PROMPT = "Welcome to the Kleene Star Converter Program!";
-    public String Q_1 = "Please type NFA if converting an NFA or DFA if converting a DFA: ";
     static boolean validInput = true;
     static String[] allStates = new String[21];
     static String startState;
@@ -34,16 +32,11 @@ public class StarProject
      * 
      */
     public static void main(String[] args){
-        //Get user input by calling helper function; will check for valid input here.
+        //Get user input by calling helper function; will check for valid input and alter input here.
         promptUser();
         
-        //If user entered valid input, proceed.
-        //if(validInput == true){
-            //Perform computation of converting the NFA or DFA.
-            convert();
-            //Return the appropriate NFA accepting A* to the user.
-       // }
-
+        //return appropriate answer to user.
+        returnAnswer();
     }
     
     /**
@@ -52,7 +45,7 @@ public class StarProject
      * Purpose: Convert given NFA or DFA to NFA that accepts A*
      * 
      */
-    public static void convert(){
+    public static void returnAnswer(){
         //add new start state to the transitionTable
         transitionTable.put("Start", new ArrayList<String>(Arrays.asList("epsilon->" + startState)));
         //add new start state to list of accept states and to list of all states
@@ -62,7 +55,7 @@ public class StarProject
         allStates[numAll+1] = "Start";
         startState = "Start";
         System.out.println("*****************");
-        System.out.println("HERE IS THE GODDAMN ANSWER YOU LAZY PERSON");
+        System.out.println("PROGRAM OUTPUT: ");
         System.out.println("Start State: "+startState);
         System.out.println("Accept States: ");
         System.out.println("Start");
@@ -70,11 +63,11 @@ public class StarProject
         System.out.println("All States: ");
         System.out.println("Start");
         printMyArray(allStates);
-        System.out.println("Alphabet");
+        System.out.println("Alphabet: ");
         printMyArray(alphabet);
         System.out.println("Transition Table: ");
-        String printShitOut = transitionTable.toString();
-        System.out.println(printShitOut);
+        String printTableOut = transitionTable.toString();
+        System.out.println(printTableOut);
        
     }
     
@@ -109,7 +102,6 @@ public class StarProject
         System.out.println(Q_1);
         //Save response, determine if prompt for NFA or DFA.
         String state;
-        //String[] allStates = new String[20];
         Scanner keyboard = new Scanner(System.in);
         state = keyboard.nextLine();
         state = state.trim();
@@ -192,12 +184,13 @@ public class StarProject
                 System.out.println("Please enter an accepting state. 3 char max. Max 20 accept states, type 'done' when finished. Must be a state from previous state you entered.Then hit return:");
                 state = keyboard.nextLine();
                 state = state.trim();
-                if(isStateInList(state)==true){
-                    if(state.equals("done")||i==acceptStates.length-1){
+                if(state.equals("done")||i==acceptStates.length-1){
                         System.out.println("Thank you for entering the accept states.");
                         break;
                     }
-                    else if(state.length() <=3 || state.equals("empty")){
+                if(isStateInList(state)==true){
+                    
+                    if(state.length() <=3 || state.equals("empty")){
                         acceptStates[i]=state;
                     }
                     else{
@@ -221,13 +214,13 @@ public class StarProject
             transitionTable.put(allStates[i], new ArrayList<String>(Arrays.asList("garbage")));
             ArrayList transitions = new ArrayList<String>(Arrays.asList(""));
             for(int j = 0; j < alphabetLen; j++){
-                System.out.println("Please enter the state transition for " + alphabet[j] + " for state " + allStates[i]);
+                System.out.println("Please enter the state transition for { " + alphabet[j] + " } for state { " + allStates[i]+" }.");
                 state = keyboard.nextLine();
                 state = state.trim();
                 transitions.add(alphabet[j] + "->" + state);
             }
                if(isItAnAcceptState(allStates[i])){
-                transitions.add("epsilon->" + startState);
+                transitions.add("empty->" + startState);
             }
             transitionTable.put(allStates[i], transitions);
         }
@@ -275,16 +268,5 @@ public class StarProject
         }
         return false;
     }
-
-    /**
-     * Function printResult()
-     * 
-     * Purpose: Print NFA or DFA in 5-tuple format.
-     * 
-     */
-    public static void printResult(){
-        
-    }
-    
     
 }
