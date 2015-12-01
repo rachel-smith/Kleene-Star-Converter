@@ -1,8 +1,8 @@
 #BlueJ package file
 package.editor.height=400
 package.editor.width=560
-package.editor.x=30
-package.editor.y=30
+package.editor.x=705
+package.editor.y=113
 package.numDependencies=0
 package.numTargets=1
 package.showExtends=true
@@ -14,8 +14,8 @@ readme.editor.x=0
 readme.editor.y=23
 target1.editor.height=700
 target1.editor.width=1120
-target1.editor.x=310
-target1.editor.y=65
+target1.editor.x=308
+target1.editor.y=152
 target1.height=50
 target1.name=StarProject
 target1.naviview.expanded=false
