@@ -42,7 +42,7 @@ public class StarProject
     /**
      * Function convert()
      * 
-     * Purpose: Convert given NFA or DFA to NFA that accepts A*
+     * Purpose: Show user given NFA or DFA to NFA that accepts A*
      * 
      */
     public static void returnAnswer(){
